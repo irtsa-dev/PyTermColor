@@ -1,3 +1,5 @@
+![PyPI](https://img.shields.io/pypi/v/idev-pytermcolor) ![Python](https://img.shields.io/pypi/pyversions/idev-pytermcolor)
+# **PyTermColor**
 A [**python**](https://www.python.org) collection of functions to print of colored text to console / terminal.
 <br />
 <br />
@@ -6,6 +8,10 @@ A [**python**](https://www.python.org) collection of functions to print of color
 With `git` [GitHub](https://github.com/IrtsaDevelopment/PyColor):
 ```
 git clone https://github.com/IrtsaDevelopment/PyTermColor.git
+```
+With `pip` [PyPi](https://pypi.org/project/idev-pytermcolor)
+```
+pip install idev-pytermcolor
 ```
 <br />
 <br />
