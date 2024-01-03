@@ -37,9 +37,9 @@ Colors = {
 }
 
 Decorations = {
-    'bold' : '\x1b[1m',
-    'underline' : '\x1b[4m',
-    'inverted' : '\x1b[7m'
+    'bold' : '1',
+    'underline' : '4',
+    'inverted' : '7'
 }
 
 
@@ -63,7 +63,15 @@ def __createColor(rgb: tuple) -> str:
     green = str(rgb[1])
     blue = str(rgb[2])
 
-    return red + ';' + green + ';' + blue + 'm'
+    return red + ';' + green + ';' + blue
+
+
+
+def __constructEscapeString(textColor: str, backgroundColor: str, decorations: list) -> str:
+    escapeString = '\033[38;2;' + textColor
+    if backgroundColor: escapeString += ';48;2;' + backgroundColor
+    for decoration in decorations: escapeString += ';' + decoration
+    return escapeString + 'm'
 
 
 
@@ -89,13 +97,15 @@ def showDecorationList() -> None:
 
 
 
-def printRGBColor(text: str, rgb: tuple, decorations: list | str = [], end: str = '\n') -> None:
+def printRGBColor(text: str, textRGB: tuple, backroundRGB: tuple = (), decorations: list | str = [], end: str = '\n') -> None:
     '''
     Prints text in color from a given rgb format.\n
     text: str
      Text to print off.
-    rgb: tuple
+    textRGB: tuple
      Tuple of rgb values to make text.
+    backgroundRGB: tuple
+     Tuple of rgb values to make background.
     decorations: list | str
      List or string of decoration values to add to the text.
     end: str
@@ -105,24 +115,29 @@ def printRGBColor(text: str, rgb: tuple, decorations: list | str = [], end: str 
     global Decorations
 
     if type(decorations) == str: decorations = [decorations]
-    if not __isValidRGB(rgb): raise ValueError('Argument rgb contains an illegal value, all values must be between 0-255.')
+    if not __isValidRGB(rgb): raise ValueError('Argument textRGB contains an illegal value, all values must be between 0-255.')
+    if len(backgroundRGB) > 0 and not __isValidRGB(backgroundRGB): raise ValueError('Argument backgroundRGB contains an illegal value, all values must be between 0-255.')
     if any([True for i in decorations if i not in Decorations]): raise ValueError('Argument decorations must contain valid decoration types from given list of Decorations.')
     
-    color = __createColor(rgb)
-    decorations = ''.join([Decorations[decoration] for decoration in decorations])
+    textColor = __createColor(textRGB)
+    if len(backgroundRGB) == 3: backgroundColor = __createColor(backgroundRGB)
+    else: backgroundColor = ''
+    decorations = [Decorations[decoration] for decoration in decorations]
 
-    print(decorations + '\x1b[38;2;' + color, end = '')
+    print(__constructEscapeString(textColor, backgroundColor, decorations), end = '')
     print(text, end = '')
-    print('\x1b[0m', end = end)
+    print('\033[0m', end = end)
 
 
 
-def printColor(text: str, color: str, decorations: list | str = [], end: str = '\n') -> None:
+def printColor(text: str, textColor: str, backgroundColor: str = None, decorations: list | str = [], end: str = '\n') -> None:
     '''
     Prints text in color from a given color.\n
     text: str
      Text to print off.
-    color: str
+    textcolor: str
+     String of the color to make text.
+    backgroundColor: str
      String of the color to make text.
     decorations: list | str
      List or string of decoration values to add to the text.
@@ -133,9 +148,12 @@ def printColor(text: str, color: str, decorations: list | str = [], end: str = '
     global Decorations
 
     if type(decorations) == str: decorations = [decorations]
-    if color not in Colors: raise ValueError('Argument color must be a valid color from given list of Colors.')
+    if textColor not in Colors: raise ValueError('Argument textColor must be a valid color from given list of Colors.')
+    if not backgroundColor is None and backgroundColor not in Colors: raise ValueError('Argument backgroundColor must be a valid color from given list of Colors.')
     if any([True for i in decorations if i not in Decorations]): raise ValueError('Argument decorations must contain valid decoration types from given list of Decorations.')
 
     color = Colors[color]
+    if backgroundColor is None: backgroundColor = ()
+    else: backgroundColor = Colors[backgroundColor]
 
-    printRGBColor(text, color, decorations, end)
+    printRGBColor(text, textColor, backgroundColor, decorations, end)
