@@ -38,8 +38,10 @@ Colors = {
 
 Decorations = {
     'bold' : '1',
+    'italic' : '3',
     'underline' : '4',
-    'inverted' : '7'
+    'inverted' : '7',
+    'doubleunderline' : '21'
 }
 
 
