@@ -41,7 +41,7 @@ showDecorationList()
 <br />
 ### Code Examples
 ```py
-from PyTermColor import *
+from PyTermColor.Color import *
 
 printColor('hello', 'red')
 ```
