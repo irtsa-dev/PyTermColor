@@ -17,7 +17,7 @@ git clone https://github.com/IrtsaDevelopment/PyTermColor.git
 ## Usage
 To import:
 ```py
-from PyTermColor import *
+from PyTermColor.Color import *
 ```
 <br />
 
@@ -46,12 +46,12 @@ from PyTermColor.Color import *
 printColor('hello', 'red')
 ```
 ```py
-from PyTermColor import *
+from PyTermColor.Color import *
 
 printColorRGB('hello', (100, 200, 50))
 ```
 ```py
-from PyTermnColor import *
+from PyTermnColor.Color import *
 
 printColor('hello', 'red', 'bold')
 printColor('hello there', 'red', ['bold', 'underline'])
