@@ -33,7 +33,7 @@ Colors = {
     'darkblue': (0, 0, 100),
     'darkpurple': (100, 0, 100),
     'darkyellow' : (100, 100, 0),
-    'darkorange' : (100, 50, 0),
+    'darkorange' : (100, 50, 0)
 }
 
 Decorations = {
