@@ -7,7 +7,7 @@ A [**python**](https://www.python.org) collection of functions to print of color
 ## Installation
 With `git` [GitHub](https://github.com/IrtsaDevelopment/PyColor):
 ```
-git clone https://github.com/IrtsaDevelopment/PyTermColor.git
+git clone https://github.com/irtsa-dev/PyTermColor.git
 ```
 With `pip` [PyPi](https://pypi.org/project/idev-pytermcolor)
 ```
